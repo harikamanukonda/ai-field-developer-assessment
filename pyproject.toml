@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-field-developer-assessment"
+version = "1.0.0"
+description = "MCP server, authorization proxy, streaming PII guardrail, and resilient LLM router"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.12,<2", "pydantic>=2.9,<3", "fastapi>=0.115,<1", "httpx>=0.27,<1", "uvicorn>=0.30,<1", "PyJWT>=2.9,<3", "tiktoken>=0.8,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2"]
+
+[project.scripts]
+assessment-mcp = "assessment.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
